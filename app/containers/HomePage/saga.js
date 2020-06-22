@@ -7,7 +7,7 @@ import { apiRequest } from '../../global-utils';
 export function* queyZoneList() {
   const response = yield call(
     apiRequest,
-    'https://www.e-solat.gov.my/index.php?r=esolatApi/BgImageByPrayertime&praytime=Zohor',
+    'https://waktu-solat-api.herokuapp.com/api/v1/prayer_times.json',
   );
 }
 
