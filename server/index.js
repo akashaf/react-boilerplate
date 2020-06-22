@@ -1,5 +1,6 @@
 /* eslint consistent-return:0 import/order:0 */
-
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const logger = require('./logger');
 
@@ -36,21 +37,29 @@ app.get('*.js', (req, res, next) => {
 });
 
 // Start your app.
-app.listen(port, host, async err => {
-  if (err) {
-    return logger.error(err.message);
-  }
-
-  // Connect to ngrok in dev mode
-  if (ngrok) {
-    let url;
-    try {
-      url = await ngrok.connect(port);
-    } catch (e) {
-      return logger.error(e);
+https
+  .createServer(
+    {
+      key: fs.readFileSync('./server/ssl/server.key'),
+      cert: fs.readFileSync('./server/ssl/server.crt'),
+    },
+    app,
+  )
+  .listen(port, host, async err => {
+    if (err) {
+      return logger.error(err.message);
     }
-    logger.appStarted(port, prettyHost, url);
-  } else {
-    logger.appStarted(port, prettyHost);
-  }
-});
+
+    // Connect to ngrok in dev mode
+    if (ngrok) {
+      let url;
+      try {
+        url = await ngrok.connect(port);
+      } catch (e) {
+        return logger.error(e);
+      }
+      logger.appStarted(port, prettyHost, url);
+    } else {
+      logger.appStarted(port, prettyHost);
+    }
+  });

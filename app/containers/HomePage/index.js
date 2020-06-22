@@ -16,17 +16,25 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectHomePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { loadZoneList } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
+  componentDidMount() {
+    this.props.dispatch(loadZoneList());
+  }
+
   render() {
     return (
       <div>
         <Helmet>
-          <title>HomePage</title>
-          <meta name="description" content="Description of HomePage" />
+          <title>Kashaf - Solat Timeline</title>
+          <meta
+            name="description"
+            content="Solat generate for fun but accurate"
+          />
         </Helmet>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis laudantium eum sint ab sed enim dolore doloremque! Nisi, assumenda. Consequatur esse nisi ratione fugit facilis magnam, quos deleniti consequuntur amet?
+        <h1 style={{ textAlign: 'center' }}>Waktu Solat</h1>
       </div>
     );
   }

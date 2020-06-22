@@ -4,10 +4,10 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import { LOAD_ZONE_LIST } from './constants';
 
-export function defaultAction() {
+export function loadZoneList() {
   return {
-    type: DEFAULT_ACTION,
+    type: LOAD_ZONE_LIST,
   };
 }

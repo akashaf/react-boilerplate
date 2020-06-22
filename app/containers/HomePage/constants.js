@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/HomePage/DEFAULT_ACTION';
+export const LOAD_ZONE_LIST = 'app/HomePage/LOAD_ZONE_LIST';
